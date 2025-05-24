@@ -1,22 +1,37 @@
 
-
 package models;
 
+import java.util.Objects;
 
 public class Veterinario extends BaseModel {
 
-        private String especialidad;
+    private String especialidad;
 
     public Veterinario(int id, String nombre, String email, String telefono, String especialidad) {
-        super(id, nombre, email, telefono);
+        super(id, nombre, email, telefono); 
+        
+ 
+        Objects.requireNonNull(especialidad, "La especialidad no puede ser nula.");
+        if (especialidad.trim().isEmpty()) {
+            throw new IllegalArgumentException("La especialidad no puede estar vacía.");
+        }
+        
         this.especialidad = especialidad;
     }
 
     public Veterinario(String nombre, String email, String telefono, String especialidad) {
-        super(nombre, email, telefono);
+        super(nombre, email, telefono); // Llama al otro constructor del padre
+        
+        Objects.requireNonNull(especialidad, "La especialidad no puede ser nula.");
+        if (especialidad.trim().isEmpty()) {
+            throw new IllegalArgumentException("La especialidad no puede estar vacía.");
+        }
+
         this.especialidad = especialidad;
     }
 
+
+    
     public String getEspecialidad() {
         return especialidad;
     }
@@ -25,48 +40,13 @@ public class Veterinario extends BaseModel {
         this.especialidad = especialidad;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
+  
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Veterinario{");
-        sb.append("especialidad=").append(especialidad);
-        sb.append('}');
-        return sb.toString();
+      
+        return "Veterinario{" +
+               super.toString() + 
+               ", especialidad='" + especialidad + '\'' +
+               '}';
     }
-        
-  
-    
-    
 }
